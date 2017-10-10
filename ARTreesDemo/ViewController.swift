@@ -38,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let touch = touches.first else { return }
         let results = sceneView.hitTest(touch.location(in: sceneView), types: [ARHitTestResult.ResultType.featurePoint])
         guard let hitFeature = results.last else { return }
-        let hitTransform = SCNMatrix4FromMat4(hitFeature.worldTransform)
+        let hitTransform = SCNMatrix4(hitFeature.worldTransform)
         let hitPosition = SCNVector3Make(hitTransform.m41,
                                          hitTransform.m42,
                                          hitTransform.m43)
@@ -51,8 +51,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
-        
+      
+        let configuration = ARWorldTrackingConfiguration()
         // Run the view's session
         sceneView.session.run(configuration)
     }
